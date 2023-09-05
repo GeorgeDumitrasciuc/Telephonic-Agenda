@@ -16,9 +16,25 @@ void adaugaContact(vector<Contact>& agenda) {
     cin >> contact.nume;
     cout << "Introduceti numarul de telefon: ";
     cin >> contact.numar_telefon;
-    agenda.push_back(contact);
-    cout << "Contact adaugat cu succes!" << endl;
+
+    bool valid_contact = true;
+    for (const Contact& existingContact : agenda) {
+        if (existingContact.numar_telefon == contact.numar_telefon) {
+            cout << "Acest numar de telefon exista deja in agenda!" << endl;
+            valid_contact = false;
+        }
+        if (existingContact.nume == contact.nume) {
+            cout << "Acest nume exista deja in agenda!" << endl;
+            valid_contact = false;
+        }
+    }
+
+    if (valid_contact) {
+        agenda.push_back(contact);
+        cout << "Contact adaugat cu succes!" << endl;
+    }
 }
+
 
 void afiseazaAgenda(const vector<Contact>& agenda) {
     cout << "Agenda telefonica:" << endl;
